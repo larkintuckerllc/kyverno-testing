@@ -1,0 +1,21 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: sync-configmaps
+spec:
+  rules:
+  - name: sync-configmaps
+    match:
+      any:
+      - resources:
+          kinds:
+          - Namespace
+    generate:
+      apiVersion: v1
+      kind: ConfigMap
+      name: hello
+      namespace: "{{request.object.metadata.name}}"
+      synchronize: true
+      data:
+        data:
+          hello: world

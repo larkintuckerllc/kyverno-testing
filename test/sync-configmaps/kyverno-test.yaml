@@ -1,0 +1,16 @@
+apiVersion: cli.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: sync-configmaps
+policies:
+  - sync-configmaps-clusterpolicy.yaml
+resources:
+  - hello-world-namespace.yaml
+results:
+  - policy: sync-configmaps
+    rule: sync-configmaps
+    resources:
+    - hello-world
+    generatedResource: hello-configmap-generated.yaml
+    kind: Namespace
+    result: pass

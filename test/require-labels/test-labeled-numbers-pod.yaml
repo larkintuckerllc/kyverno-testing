@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    team: 123
+  name: test-labeled-numbers
+  namespace: default
+spec: 
+  containers:
+  - name: ubuntu
+    image: ubuntu:latest
+    command: ["sleep", "3600"]

@@ -1,0 +1,56 @@
+apiVersion: cli.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: require-labels
+policies:
+  - require-labels-clusterpolicy.yaml
+resources:
+  - test-labeled-pod.yaml
+  - test-labeled-additional.pod.yaml
+  - test-labeled-underscore-pod.yaml
+  - test-labeled-dash-pod.yaml
+  - test-labeled-numbers-pod.yaml
+  - test-other-labeled-pod.yaml
+  - test-pod.yaml
+  - test-labeled-blank-pod.yaml
+results:
+  - policy: require-labels
+    rule: check-team
+    resources: 
+    - default/test-labeled
+    result: pass
+  - policy: require-labels
+    rule: check-team
+    resources: 
+    - default/test-labeled-additional
+    result: pass
+  - policy: require-labels
+    rule: check-team
+    resources: 
+    - default/test-labeled-underscore
+    result: pass
+  - policy: require-labels
+    rule: check-team
+    resources: 
+    - default/test-labeled-dash
+    result: pass
+  - policy: require-labels
+    rule: check-team
+    resources: 
+    - default/test-labeled-numbers
+    result: pass
+  - policy: require-labels
+    rule: check-team
+    resources: 
+    - default/test
+    result: fail
+  - policy: require-labels
+    rule: check-team
+    resources: 
+    - default/test-other-labeled
+    result: fail
+  - policy: require-labels
+    rule: check-team
+    resources: 
+    - default/test-labeled-blank
+    result: fail
