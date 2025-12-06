@@ -18,39 +18,47 @@ results:
     rule: check-team
     resources: 
     - default/test-labeled
+    kind: Pod
     result: pass
   - policy: require-labels
     rule: check-team
     resources: 
     - default/test-labeled-additional
+    kind: Pod
     result: pass
   - policy: require-labels
     rule: check-team
     resources: 
     - default/test-labeled-underscore
+    kind: Pod
     result: pass
   - policy: require-labels
     rule: check-team
     resources: 
     - default/test-labeled-dash
+    kind: Pod
     result: pass
   - policy: require-labels
     rule: check-team
     resources: 
     - default/test-labeled-numbers
+    kind: Pod
     result: pass
   - policy: require-labels
     rule: check-team
     resources: 
     - default/test
+    kind: Pod
     result: fail
   - policy: require-labels
     rule: check-team
     resources: 
     - default/test-other-labeled
+    kind: Pod
     result: fail
   - policy: require-labels
     rule: check-team
     resources: 
     - default/test-labeled-blank
+    kind: Pod
     result: fail

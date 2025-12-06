@@ -13,16 +13,19 @@ results:
     rule: add-team
     resources: 
     - default/test
+    kind: Pod
     result: pass
     patchedResources: test-pod-patched.yaml
   - policy: add-labels
     rule: add-team
     resources: 
     - default/test-labeled
+    kind: Pod
     result: pass
     patchedResources: test-labeled-pod-patched.yaml
   - policy: add-labels
     rule: add-team
     resources: 
     - default/test-labeled-team
+    kind: Pod
     result: skip
