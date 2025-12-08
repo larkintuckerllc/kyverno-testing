@@ -1,0 +1,24 @@
+apiVersion: chainsaw.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: pod-with-whitespace-only-team-label
+spec:
+  steps:
+  - try:
+    - apply:
+        file: resources.yaml
+    - assert:
+        resource:
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: test
+            (labels != null): true
+    - assert:
+        resource:
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: test
+            (length(keys(labels)) == `1`): true
+            (labels.team == ' '): true

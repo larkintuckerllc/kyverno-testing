@@ -1,0 +1,12 @@
+apiVersion: chainsaw.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: pod-with-blank-team-label
+spec:
+  steps:
+  - try:
+    - apply:
+        file: resources.yaml
+        expect:
+          - check:
+              ($error != null): true
