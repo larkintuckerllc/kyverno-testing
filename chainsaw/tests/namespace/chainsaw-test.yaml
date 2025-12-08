@@ -22,4 +22,5 @@ spec:
           metadata:
             name: hello
             namespace: test-namespace
+          (length(keys(data)) == `1`): true
           (data.hello == 'world'): true
