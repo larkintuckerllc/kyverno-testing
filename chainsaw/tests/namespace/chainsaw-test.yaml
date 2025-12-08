@@ -1,0 +1,24 @@
+apiVersion: chainsaw.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: namespace
+spec:
+  steps:
+  - try:
+    - apply:
+        file: resources.yaml
+    - assert:
+        resource:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: hello
+            namespace: test-namespace
+    - assert:
+        resource:
+          apiVersion: v1
+          kind: ConfigMap
+          metadata:
+            name: hello
+            namespace: test-namespace
+          (data.hello == 'world'): true
