@@ -3,6 +3,7 @@ kind: Test
 metadata:
   name: namespace
 spec:
+  namespace: default
   steps:
   - try:
     - apply:
