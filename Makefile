@@ -3,18 +3,26 @@ CLI_VER=v1.16.1
 KIND_VER=v0.31.0
 
 .PHONY: all
-all: test integration-test
+all: policies-test unit-test integration-test
 
 .PHONY: clean
 clean:
 	kind delete cluster
 
+.PHONY: policies-test
+policies-test: /usr/local/bin/kyverno
+	kyverno apply policies/ -r resources/ --policy-report
+
+.PHONY: cluster-test
+cluster-test: /usr/local/bin/kyverno
+	kyverno apply policies/ -r resources/ --cluster --policy-report
+
 # https://medium.com/@john-tucker/kyverno-policy-testing-part-1-6922201eb3eb
 # Unit tests
 # doesn't need a Kubernetes cluster
 
-.PHONY: test
-test: /usr/local/bin/kyverno
+.PHONY: unit-test
+unit-test: /usr/local/bin/kyverno
 	@for dir in test/*/; do \
 		echo "Testing $$dir"; \
 		(cd "$$dir" && kyverno test .); \
