@@ -1,0 +1,27 @@
+---
+# Run tests
+name: kyverno-testing
+
+on:
+  push:
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+
+    permissions: {}
+
+    name: Install Kyverno CLI
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Install Kyverno CLI
+        uses: kyverno/action-install-cli@v0.2.0
+        with:
+          release: 'v1.16.1'
+      - name: Check install
+        run: kyverno version
+      - name: Unit-test policies in test folder
+        run: kyverno test test/
+      - name: Test resources against policies
+        run: kyverno apply policies/ -r resources/ --policy-report
